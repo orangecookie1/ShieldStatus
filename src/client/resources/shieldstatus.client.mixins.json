@@ -1,11 +1,18 @@
 {
-	"required": true,
-	"package": "notcookies.shieldstatus.mixin.client",
-	"compatibilityLevel": "JAVA_21",
-	"client": [
-		"ExampleClientMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
-	}
+  "required": true,
+  "package": "notcookies.shieldstatus.mixin.client",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "ClientWorldMixin",
+    "ExampleClientMixin",
+    "HeldItemRendererMixin",
+    "LivingEntityRendererMixin",
+    "ShieldModelRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+    "ShieldModelRendererMixin"
+  ]
 }

@@ -10,32 +10,33 @@ import java.util.Map;
 import java.util.UUID;
 
 public class ShieldDisableDetector {
-    private final Map<UUID, Boolean> wasOnCooldown = new HashMap<>();
+    private final Map<UUID, Boolean> lastCooldownValues = new HashMap<>();
+    public static Map<UUID, Boolean> SHIELD_STATE = new HashMap<>();
 
     public void register() {
-        ClientTickEvents.END_CLIENT_TICK.register(this::onClientTick);
+        ClientTickEvents.END_CLIENT_TICK.register(this::onTick);
     }
 
-    private void onClientTick(MinecraftClient client) {
+    private void onTick(MinecraftClient client) {
         if (client.world == null) return;
-
-        for (PlayerEntity player : client.world.getPlayers()) {
+        long currentTime = System.currentTimeMillis();
+        /*for (PlayerEntity player : client.world.getPlayers()) {
             UUID id = player.getUuid();
 
-            boolean isOnCooldown = player.getItemCooldownManager().isCoolingDown(Items.SHIELD.getDefaultStack());
-            boolean wasOnCooldownBefore = wasOnCooldown.getOrDefault(id, false);
+            boolean isCooldown = player.getItemCooldownManager().isCoolingDown(Items.SHIELD.getDefaultStack());
+            boolean usable = !isCooldown;
 
-            // Cooldown started
-            if (isOnCooldown && !wasOnCooldownBefore) {
+            SHIELD_STATE.put(id, usable);
+
+            boolean previous = lastCooldownValues.getOrDefault(id, false);
+
+            // Optional logging per player
+            if (isCooldown && !previous)
                 System.out.println(player.getName().getString() + "'s shield was disabled!");
-            }
+            if (!isCooldown && previous)
+                System.out.println(player.getName().getString() + "'s shield was re-enabled!");
 
-            // Cooldown just ended → shield re-enabled
-            if (!isOnCooldown && wasOnCooldownBefore) {
-                System.out.println(player.getName().getString() + "'s shield is usable again!");
-            }
-
-            wasOnCooldown.put(id, isOnCooldown);
-        }
+            lastCooldownValues.put(id, isCooldown);
+        }*/
     }
 }
