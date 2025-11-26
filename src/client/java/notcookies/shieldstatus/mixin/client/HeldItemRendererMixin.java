@@ -16,20 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class HeldItemRendererMixin {
 
     @Inject(method = "renderFirstPersonItem", at = @At("HEAD"))
-    private void captureFirstPersonEntity(
-            AbstractClientPlayerEntity player,
-            float tickDelta,
-            float pitch,
-            Hand hand,
-            float swingProgress,
-            ItemStack item,
-            float equipProgress,
-            MatrixStack matrices,
-            VertexConsumerProvider vertexConsumers,
-            int light,
-            CallbackInfo ci
-    ) {
-        //ShieldStatusClient.currentEntity = player;
-        //System.out.println("Capturing first-person player: " + player.getName().getString());
+    private void captureFirstPersonEntity(AbstractClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack item, float equipProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
+        ShieldStatusClient.currentEntity = player;
     }
 }

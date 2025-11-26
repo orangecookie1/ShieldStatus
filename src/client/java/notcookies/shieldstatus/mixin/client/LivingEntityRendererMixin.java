@@ -17,8 +17,7 @@ public abstract class LivingEntityRendererMixin<T extends LivingEntity, S extend
     @Inject(method = "updateRenderState", at = @At("HEAD"))
     private void captureEntity(T entity, S state, float tickDelta, CallbackInfo ci) {
         if (entity instanceof PlayerEntity) {
-            //ShieldStatusClient.currentEntity = entity;
-            //System.out.println("Capturing player: " + entity.getName().getString());
+            ShieldStatusClient.currentEntity = entity;
         }
     }
 }

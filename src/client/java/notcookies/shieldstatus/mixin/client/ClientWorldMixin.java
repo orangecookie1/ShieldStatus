@@ -21,11 +21,6 @@ import java.util.UUID;
 
 @Mixin(ClientWorld.class)
 public class ClientWorldMixin {
-
-    private final Map<UUID, Boolean> lastCooldownValues = new HashMap<>();
-    public static Map<UUID, Boolean> SHIELD_STATE = new HashMap<>();
-
-
     @Inject(method = "playSound(Lnet/minecraft/entity/Entity;DDDLnet/minecraft/registry/entry/RegistryEntry;Lnet/minecraft/sound/SoundCategory;FFJ)V", at = @At("HEAD"))
     private void onPlaySound(@Nullable Entity entity, double x, double y, double z, RegistryEntry<SoundEvent> sound, SoundCategory category, float volume, float pitch, long seed, CallbackInfo ci) {
         // Compare registry entries using matchesId or by checking the sound's identifier
@@ -33,8 +28,6 @@ public class ClientWorldMixin {
             MinecraftClient client = MinecraftClient.getInstance();
             if (client.player != null) {
                 client.player.sendMessage(Text.literal("§cShield break sound detected at " + String.format("%.1f, %.1f, %.1f", x, y, z)), false);
-                System.out.println("Shield break sound at " + x + ", " + y + ", " + z);
-
                 if (entity != null) {
                     System.out.println("Entity: " + entity.getName().getString());
                     UUID id = entity.getUuid();

@@ -8,6 +8,7 @@ import net.minecraft.item.Items;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import notcookies.shieldstatus.ShieldStatusClient;
 
 public class ShieldDisableDetector {
     private final Map<UUID, Boolean> lastCooldownValues = new HashMap<>();
@@ -19,24 +20,19 @@ public class ShieldDisableDetector {
 
     private void onTick(MinecraftClient client) {
         if (client.world == null) return;
-        long currentTime = System.currentTimeMillis();
-        /*for (PlayerEntity player : client.world.getPlayers()) {
-            UUID id = player.getUuid();
+        for (Map.Entry<UUID, Long> entry : ShieldStatusClient.SHIELD_DISABLED_START.entrySet()) {
+            long currentTime = System.currentTimeMillis();
+            UUID uuid = entry.getKey();
+            Long startTime = entry.getValue();
+            long elapsed  = currentTime-startTime;
 
-            boolean isCooldown = player.getItemCooldownManager().isCoolingDown(Items.SHIELD.getDefaultStack());
-            boolean usable = !isCooldown;
-
-            SHIELD_STATE.put(id, usable);
-
-            boolean previous = lastCooldownValues.getOrDefault(id, false);
-
-            // Optional logging per player
-            if (isCooldown && !previous)
-                System.out.println(player.getName().getString() + "'s shield was disabled!");
-            if (!isCooldown && previous)
-                System.out.println(player.getName().getString() + "'s shield was re-enabled!");
-
-            lastCooldownValues.put(id, isCooldown);
-        }*/
+            if(elapsed > 5000){
+                ShieldStatusClient.SHIELD_DISABLED_START.remove(uuid);
+                System.out.println("Shield was re-enabled!");
+                SHIELD_STATE.put(uuid, true);
+            }else if (elapsed < 5000){
+                SHIELD_STATE.put(uuid, false);
+            }
+        }
     }
 }

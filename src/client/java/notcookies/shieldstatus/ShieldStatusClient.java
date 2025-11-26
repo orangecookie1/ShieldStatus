@@ -2,6 +2,7 @@ package notcookies.shieldstatus;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.entity.LivingEntity;
+import notcookies.shieldstatus.config.ConfigManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +17,7 @@ public class ShieldStatusClient implements ClientModInitializer {
     public void onInitializeClient() {
         ShieldDisableDetector detector = new ShieldDisableDetector();
         detector.register();
-        System.out.println("Shield Color by Status Loaded!");
+        ConfigManager.load();
+        System.out.println("[ShieldStatus] Shield Status Mod Loaded!");
     }
 }
