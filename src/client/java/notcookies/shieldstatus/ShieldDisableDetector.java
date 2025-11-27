@@ -6,6 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 import notcookies.shieldstatus.ShieldStatusClient;
@@ -20,17 +21,21 @@ public class ShieldDisableDetector {
 
     private void onTick(MinecraftClient client) {
         if (client.world == null) return;
-        for (Map.Entry<UUID, Long> entry : ShieldStatusClient.SHIELD_DISABLED_START.entrySet()) {
-            long currentTime = System.currentTimeMillis();
+
+        long currentTime = System.currentTimeMillis();
+
+        Iterator<Map.Entry<UUID, Long>> iterator = ShieldStatusClient.SHIELD_DISABLED_START.entrySet().iterator();
+
+        while (iterator.hasNext()) {
+            Map.Entry<UUID, Long> entry = iterator.next();
             UUID uuid = entry.getKey();
             Long startTime = entry.getValue();
-            long elapsed  = currentTime-startTime;
+            long elapsed = currentTime - startTime;
 
-            if(elapsed > 5000){
-                ShieldStatusClient.SHIELD_DISABLED_START.remove(uuid);
-                System.out.println("Shield was re-enabled!");
+            if (elapsed >= 5000) {
+                iterator.remove();
                 SHIELD_STATE.put(uuid, true);
-            }else if (elapsed < 5000){
+            } else {
                 SHIELD_STATE.put(uuid, false);
             }
         }

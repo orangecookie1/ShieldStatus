@@ -36,27 +36,25 @@ public class ShieldModelRendererMixin {
     ) {
         LivingEntity entity = ShieldStatusClient.currentEntity;
 
-        float[] color = new float[]{1.0f, 1.0f, 1.0f, 0.7f}; // Default white
+        if (itemDisplayContext == ItemDisplayContext.GUI) {
+            return original;
+        }
+
+        float[] color = new float[]{1.0f, 1.0f, 1.0f, 0.7f};
 
         if (entity != null) {
             UUID playerUUID = entity.getUuid();
 
-            // Check shield state from ShieldDisableDetector
             Boolean shieldUsable = notcookies.shieldstatus.ShieldDisableDetector.SHIELD_STATE.get(playerUUID);
 
             if (shieldUsable != null) {
                 if (shieldUsable) {
-                    // Shield is OFF cooldown (enabled) - GREEN
                     color = new float[]{0.0f, 1.0f, 0.0f, 0.7f};
-                    //System.out.println("Rendering GREEN shield for " + entity.getName().getString() + " (enabled)");
                 } else {
-                    // Shield is ON cooldown (disabled) - RED
                     color = new float[]{1.0f, 0.0f, 0.0f, 0.7f};
-                    //System.out.println("Rendering RED shield for " + entity.getName().getString() + " (disabled)");
                 }
             } else {
-                // Player not tracked yet - white/default
-                //System.out.println("Player " + entity.getName().getString() + " not in SHIELD_STATE map");
+                color = new float[]{0.0f, 1.0f, 0.0f, 0.7f};
             }
         }
 
