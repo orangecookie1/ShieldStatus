@@ -14,7 +14,7 @@ public class ShieldStatusClient implements ClientModInitializer {
 
     public static LivingEntity currentEntity = null;
     public static Map<UUID, Long> SHIELD_DISABLED_START = new HashMap<>();
-
+    //This is main
     @Override
     public void onInitializeClient() {
         ShieldDisableDetector detector = new ShieldDisableDetector();
