@@ -11,7 +11,7 @@ import java.nio.file.Path;
 public class ConfigManager {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final Path PATH =
-    FabricLoader.getInstance().getConfigDir().resolve("my_mod.json");
+    FabricLoader.getInstance().getConfigDir().resolve("ShieldStatus.json");
 
     public static Config CONFIG = new Config();
 
