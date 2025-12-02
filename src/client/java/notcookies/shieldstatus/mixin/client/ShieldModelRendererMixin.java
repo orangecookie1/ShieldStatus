@@ -95,8 +95,8 @@ public class ShieldModelRendererMixin {
 
         float progress = Math.min(elapsed / 5000.0f, 1.0f);
 
-        float red = 1.0f - (progress * 0.65f);
-        float green = (progress * 0.85f);
+        float red = 1.0f - (progress);
+        float green = (progress * 0.75f);
         float blue = 0.0f;
         float alpha = 0.7f;
 
