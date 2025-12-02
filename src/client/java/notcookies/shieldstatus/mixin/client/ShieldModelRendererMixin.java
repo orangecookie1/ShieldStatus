@@ -5,7 +5,7 @@ import net.minecraft.client.render.item.model.special.ShieldModelRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.component.ComponentMap;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemDisplayContext;
+import net.minecraft.item.ModelTransformationMode;
 import notcookies.shieldstatus.ShieldStatusClient;
 import notcookies.shieldstatus.TintedVertexConsumer;
 import notcookies.shieldstatus.config.ConfigManager;
@@ -29,7 +29,7 @@ public class ShieldModelRendererMixin {
     private VertexConsumerProvider applyColorTint(
             VertexConsumerProvider original,
             @Nullable ComponentMap componentMap,
-            ItemDisplayContext itemDisplayContext,
+            ModelTransformationMode modelTransformationMode,
             MatrixStack matrixStack,
             VertexConsumerProvider vertexConsumerProvider,
             int light,
@@ -38,7 +38,7 @@ public class ShieldModelRendererMixin {
     ) {
         LivingEntity entity = ShieldStatusClient.currentEntity;
 
-        if (itemDisplayContext == ItemDisplayContext.GUI) {
+        if (modelTransformationMode == ModelTransformationMode.GUI) {
             return original;
         }
 
@@ -95,8 +95,8 @@ public class ShieldModelRendererMixin {
 
         float progress = Math.min(elapsed / 5000.0f, 1.0f);
 
-        float red = 1.0f - (progress * 0.65f);
-        float green = (progress * 0.85f);
+        float red = 1.0f - (progress /** 0.65f*/);
+        float green = (progress * 0.75f);
         float blue = 0.0f;
         float alpha = 0.7f;
 
