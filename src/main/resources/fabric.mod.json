@@ -3,9 +3,9 @@
 	"id": "shieldstatus",
 	"version": "${version}",
 	"name": "ShieldStatus",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Shield Status+ is a lightweight Fabric client-side mod that tracks and displays shield disable cooldowns, giving you clear awareness of when your shield is broken and when it will be usable again.",
 	"authors": [
-		"Me!"
+		"NotCookies"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
