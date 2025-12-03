@@ -64,25 +64,25 @@ public class ClientWorldMixin {
                         float shieldCooldown = client.player.getItemCooldownManager().getCooldownProgress(new ItemStack(Items.SHIELD), 0.0f);
                         if (shieldCooldown <= 0.0f) {
                             // Your shield is NOT on cooldown, so this is a false detection
-                            System.out.println("Ignoring shield break for " + closestPlayer.getName().getString() + " - shield not on cooldown");
+                            //System.out.println("Ignoring shield break for " + closestPlayer.getName().getString() + " - shield not on cooldown");
                             return;
                         }
                     }
 
-                    client.player.sendMessage(
-                            Text.literal("§cShield disabled for: " + closestPlayer.getName().getString()),
-                            false
-                    );
-                    System.out.println("Shield disabled for: " + closestPlayer.getName().getString() + " at distance: " + Math.sqrt(closestDistance));
-                    System.out.println("Shield disabled for: " + closestPlayer.getName().getString() + " at X: " + x + " Y: " + y + " Z: " + z);
+                    //client.player.sendMessage(
+                    //        Text.literal("§cShield disabled for: " + closestPlayer.getName().getString()),
+                    //        false
+                    //);
+                    //System.out.println("Shield disabled for: " + closestPlayer.getName().getString() + " at distance: " + Math.sqrt(closestDistance));
+                    //System.out.println("Shield disabled for: " + closestPlayer.getName().getString() + " at X: " + x + " Y: " + y + " Z: " + z);
 
                     // Record the disable time
                     notcookies.shieldstatus.ShieldStatusClient.SHIELD_DISABLED_START.putIfAbsent(id, System.currentTimeMillis());
                 } else {
-                    client.player.sendMessage(
-                            Text.literal("§eShield break sound detected but no player nearby"),
-                            false
-                    );
+                    //client.player.sendMessage(
+                    //        Text.literal("§eShield break sound detected but no player nearby"),
+                    //        false
+                    //);
                 }
             }
         }
