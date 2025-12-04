@@ -7,7 +7,6 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
 import net.minecraft.entity.player.PlayerEntity;
 
